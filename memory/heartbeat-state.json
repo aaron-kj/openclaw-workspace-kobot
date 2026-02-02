@@ -1,0 +1,9 @@
+{
+  "lastChecks": {
+    "aiNewsSummary": 1769732160000,
+    "aiNewsTestRun": 1738138380000
+  },
+  "notes": "Track last run timestamps for heartbeat tasks (Unix epoch ms)",
+  "testRunCompleted": "2026-01-29T14:13:00+09:00",
+  "lastWeeklySummary": "2026-01-30T09:16:00+09:00"
+}

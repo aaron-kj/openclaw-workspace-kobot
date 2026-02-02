@@ -1,0 +1,24 @@
+# Audit Log
+
+This file logs all potentially sensitive operations for security review.
+
+Format: JSON Lines (one JSON object per line)
+
+Fields:
+- timestamp: ISO-8601 timestamp with timezone
+- session: session identifier
+- user: user identifier
+- channel: channel/DM identifier  
+- action: operation type (exec, read, write, message, etc.)
+- target: target of the operation (file path, command, etc.)
+- status: allowed / blocked / error
+- reason: why it was allowed or blocked
+
+---
+
+{"timestamp":"2026-01-29T13:42:00+09:00","session":"slack-main","user":"chingchao.wu","channel":"D0ACGA44Z6U","action":"write","target":"SECURITY.md","status":"allowed","reason":"owner_request_security_setup"}
+{"timestamp":"2026-01-29T13:42:05+09:00","session":"slack-main","user":"chingchao.wu","channel":"D0ACGA44Z6U","action":"write","target":"memory/audit-log.jsonl","status":"allowed","reason":"owner_request_security_setup"}
+{"timestamp":"2026-01-29T13:42:10+09:00","session":"slack-main","user":"chingchao.wu","channel":"D0ACGA44Z6U","action":"write","target":"memory/security-alerts.jsonl","status":"allowed","reason":"owner_request_security_setup"}
+{"timestamp":"2026-01-29T13:51:53+09:00","session":"slack-main","user":"chingchao.wu","channel":"D0ACGA44Z6U","action":"exec","target":"ls -la","status":"allowed","reason":"owner_private_dm"}
+{"timestamp":"2026-01-29T14:11:39+09:00","session":"slack-main","user":"chingchao.wu","channel":"D0ACGA44Z6U","action":"edit","target":"SECURITY.md","status":"allowed","reason":"owner_request_hostname_privacy"}
+{"timestamp":"2026-01-29T14:25:50+09:00","session":"slack-main","user":"chingchao.wu","channel":"D0ACGA44Z6U","action":"cron","target":"add:Daily Health Check","status":"allowed","reason":"owner_request_health_monitoring"}

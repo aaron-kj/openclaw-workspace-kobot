@@ -1,0 +1,17 @@
+# Security Alerts
+
+This file logs security policy violations and suspicious activity.
+
+Format: JSON Lines (one JSON object per line)
+
+Fields:
+- timestamp: ISO-8601 timestamp with timezone
+- channel: where the attempt originated
+- user: who made the attempt (if identifiable)
+- action: what they tried to do
+- status: blocked / reported / escalated
+- reason: why it was flagged as suspicious
+- severity: low / medium / high / critical
+
+---
+
