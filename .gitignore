@@ -1,0 +1,33 @@
+# Environment variables
+.env
+*.env
+.env.*
+
+# Clawdbot config (may contain secrets)
+config.yaml
+config.yml
+gateway.yaml
+gateway.yml
+
+# Session data
+sessions/
+.sessions/
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node
+node_modules/
+npm-debug.log*
