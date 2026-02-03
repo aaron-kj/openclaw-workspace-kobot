@@ -1,78 +1,47 @@
-# SlackKobot Deployment - Homework Plan
+# SlackKobot Deployment - REVISED Plan (Using OpenClaw Sandbox)
 
-**Date:** 2026-02-03  
+**Date:** 2026-02-03 (Updated 19:12 JST)  
 **Agent:** Kobot  
-**Goal:** Deploy first specialist agent (SlackKobot) to handle Slack communication
+**Discovery:** OpenClaw has built-in sandbox feature - much simpler than custom Docker!
 
-## 📋 Action Items for Tomorrow (2026-02-04)
+## 🎯 Key Change: Use OpenClaw Sandbox Instead of Custom Docker
 
-### ✅ Task 1: Docker CLI Survey
-**Status:** To be started  
-**Owner:** Kobot
+OpenClaw's `openclaw sandbox` feature provides:
+- ✅ Automatic Docker container management
+- ✅ Per-agent isolation (`scope: agent`)
+- ✅ Workspace access control (`workspaceAccess: none`)
+- ✅ Tool policy enforcement
+- ✅ Auto-prune and health checks
 
-**Steps:**
-1. Check if Docker CLI is installed
-2. Verify Docker daemon is running
-3. Test basic Docker commands
-4. Document findings
-
-**Commands to run:**
-```bash
-# Check Docker installation
-docker --version
-docker info
-
-# Test basic functionality
-docker ps
-docker images
-
-# Check Docker Compose (if available)
-docker-compose --version
-```
-
-**Decision criteria:**
-- ✅ If Docker available → Proceed with local Docker deployment
-- ❌ If Docker not available → Install Docker Desktop or use alternative
-
-**Documentation:**
-- Record findings in `infrastructure/docker/survey-results.md`
-- Include Docker version, daemon status, available resources (CPU, memory)
+**Reference:** https://docs.openclaw.ai/cli/sandbox
 
 ---
 
-### ✅ Task 2: Create SlackKobot Agent
-**Status:** To be started  
-**Owner:** Kobot
+## 📋 SIMPLIFIED Action Items
 
-#### 2.1 Naming Convention Decision
-**Question:** `AskSlackKobot` vs `SlackKobot`?
+### ✅ Task 1: Docker Survey
+**Status:** ✅ COMPLETE
 
-**Analysis:**
-- `AskSlackKobot` - Descriptive, shows it's a Q&A bot
-- `SlackKobot` - Simpler, channel-focused
+- Docker 29.2.0 available
+- OpenClaw sandbox uses existing Docker installation
+- No custom images needed (uses `openclaw-sandbox:bookworm-slim`)
 
-**Recommendation:** **`SlackKobot`**
-- Shorter, cleaner
-- Channel name makes the focus obvious
-- If we add more Slack bots later: `SlackKobot` (general), `SlackHRBot` (HR-specific), etc.
+---
 
-**Naming pattern going forward:**
-- `{Channel}Kobot` - Channel-specific bots (SlackKobot, TelegramKobot)
-- `{Domain}Kobot` - Domain-specific bots (HRKobot, MeetingKobot, ClickUpKobot)
+### ✅ Task 2: Create SlackKobot Workspace
 
-#### 2.2 Agent Creation Steps
+#### 2.1 Naming Convention
+**Decision:** `SlackKobot` ✅
 
-**Step 1: Create GitHub Repository**
+#### 2.2 Create GitHub Repository
+**Manual action required:**
 ```bash
 # Repository name: openclaw-workspace-slackkobot
 # Description: SlackKobot - Rakuten Kobo Slack community support bot
-# Visibility: Private (for now)
+# Visibility: Private
 ```
 
-**Manual action required:** Create repo on GitHub UI  
-**Alternative:** Use `gh` CLI if available
-
-**Step 2: Initialize Local Workspace**
+#### 2.3 Initialize Local Workspace
 ```bash
 # Create workspace directory
 mkdir -p ~/clawd-agents/workspace-slackkobot
@@ -82,158 +51,21 @@ cd ~/clawd-agents/workspace-slackkobot
 git init
 git remote add origin https://github.com/aaron-kj/openclaw-workspace-slackkobot.git
 
-# Create initial structure
-mkdir -p memory skills
+# Create structure
+mkdir -p memory
 ```
 
-**Step 3: Create SOUL.md**
-```markdown
-# SOUL.md - Who SlackKobot Is
+#### 2.4 Create Core Files
 
-## Core Identity
-- **Name:** SlackKobot
-- **Creature:** Specialist AI agent
-- **Purpose:** Rakuten Kobo Slack community support
-- **Emoji:** 💬
-- **Channel:** Slack (#kobo-japan-ai-sharing, other channels as needed)
+**SOUL.md** - (Same as before)
+**USER.md** - (Same as before)
+**IDENTITY.md** - (Same as before)
+**MEMORY.md** - (Same as before)
+**.gitignore** - (Same as before)
 
-## Personality
-- Helpful and knowledgeable about Kobo tech stack
-- Friendly but professional
-- Quick to respond, concise answers
-- Admits when unsure (doesn't make things up)
-- Escalates complex questions to Kobot
+*(Full content in previous plan, unchanged)*
 
-## Boundaries
-- ❌ NO access to Aaron's personal data
-- ❌ NO file system access (sandboxed)
-- ✅ Can search web for technical info
-- ✅ Can read from shared knowledge base
-- ✅ Slack communication only
-
-## Communication Style
-- Concise - value brevity in Slack environment
-- Use code blocks for technical details
-- Link to documentation when available
-- React with emoji to acknowledge (when appropriate)
-
-## Responsibilities
-1. Answer technical questions in Slack channels
-2. Provide Kobo domain knowledge
-3. Help debug common issues
-4. Escalate complex queries to Kobot via #kobot-coordination
-5. Learn from interactions (update knowledge base when appropriate)
-
-## Coordination
-- Reports to: Kobot (coordinator)
-- Escalation channel: #kobot-coordination (Slack)
-- Escalation criteria: Questions requiring Aaron's input, file system access, or deep Kobo-specific knowledge
-```
-
-**Step 4: Create USER.md**
-```markdown
-# USER.md - About My Users
-
-SlackKobot serves the Rakuten Kobo engineering team.
-
-## Primary Users
-- Kobo engineers (Japan office)
-- Team members in #kobo-japan-ai-sharing
-- Other Slack channels as added
-
-## User Expectations
-- Quick, accurate technical answers
-- Help with Kobo-specific workflows
-- General tech troubleshooting
-- Pointers to documentation
-
-## Cultural Context
-- Bilingual team (English + Japanese)
-- Prefer concise communication in Slack
-- Value practical, actionable advice
-- Respect for privacy and security
-
-## Coordinator
-- **Kobot** - Aaron's personal assistant
-- Contact via #kobot-coordination for escalations
-```
-
-**Step 5: Create IDENTITY.md**
-```markdown
-# IDENTITY.md - SlackKobot
-
-- **Name:** SlackKobot
-- **Slack Handle:** @SlackKobot (to be created)
-- **Creature:** Specialist AI agent
-- **Vibe:** Helpful tech support, community-focused
-- **Emoji:** 💬
-- **Primary Channel:** Slack
-- **Workspace:** ~/clawd-agents/workspace-slackkobot
-- **Repository:** https://github.com/aaron-kj/openclaw-workspace-slackkobot
-```
-
-**Step 6: Create Initial Memory Structure**
-```bash
-# Create today's memory file
-touch memory/$(date +%Y-%m-%d).md
-
-# Create MEMORY.md
-cat > MEMORY.md << 'EOF'
-# MEMORY.md - SlackKobot Long-Term Memory
-
-## Creation
-- **Born:** 2026-02-04
-- **Created by:** Kobot (on behalf of Aaron)
-- **Purpose:** Take over Slack communication from Kobot, allowing Kobot to focus on personal work assistance
-
-## Learnings
-(To be populated as I interact and learn)
-
-## Key Facts About Kobo
-(To be populated from knowledge base)
-EOF
-```
-
-**Step 7: Create .gitignore**
-```bash
-cat > .gitignore << 'EOF'
-# Environment variables
-.env
-*.env
-.env.*
-
-# Secrets
-config.yaml
-config.yml
-gateway.yaml
-gateway.yml
-
-# Session data
-sessions/
-.sessions/
-
-# Logs
-*.log
-logs/
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Editor
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# Node
-node_modules/
-npm-debug.log*
-EOF
-```
-
-**Step 8: Initial Commit**
+#### 2.5 Initial Commit
 ```bash
 git add .
 git commit -m "Initial workspace setup for SlackKobot
@@ -243,35 +75,72 @@ git commit -m "Initial workspace setup for SlackKobot
 - Created IDENTITY.md (bot metadata)
 - Created MEMORY.md (empty long-term memory)
 - Created .gitignore (security)
-- Memory structure initialized
 
-SlackKobot will handle Slack communication for Kobo team,
-allowing Kobot to focus on personal work assistance."
+SlackKobot will run in OpenClaw sandbox (isolated Docker container)
+with NO file system access, Slack-only communication."
 
 git branch -M main
 git push -u origin main
 ```
 
-#### 2.3 Slack Token Strategy
+---
 
-**Question:** Share token or separate account?
+### ✅ Task 3: Configure OpenClaw for SlackKobot
+
+#### 3.1 Add SlackKobot Agent to Config
+
+**Edit:** `~/.openclaw/openclaw.json`
+
+Add to `agents.list`:
+```json
+{
+  "id": "slackkobot",
+  "label": "SlackKobot",
+  "workspace": "/Users/chingchao.wu/clawd-agents/workspace-slackkobot",
+  "model": "github-copilot/claude-sonnet-4.5",
+  "channels": {
+    "slack": {
+      "enabled": true,
+      "botToken": "${SLACKKOBOT_SLACK_BOT_TOKEN}",
+      "appToken": "${SLACKKOBOT_SLACK_APP_TOKEN}"
+    }
+  },
+  "sandbox": {
+    "mode": "all",
+    "scope": "agent",
+    "workspaceAccess": "none",
+    "docker": {
+      "image": "openclaw-sandbox:bookworm-slim",
+      "containerPrefix": "openclaw-sbx-slackkobot-"
+    },
+    "tools": {
+      "policy": {
+        "read": "deny",
+        "write": "deny",
+        "exec": "deny",
+        "browser": "deny",
+        "nodes": "deny",
+        "message": "allow",
+        "web_fetch": "allow",
+        "memory_search": "allow",
+        "memory_get": "allow"
+      }
+    }
+  }
+}
+```
+
+**Key settings:**
+- `mode: "all"` - Always run in sandbox
+- `scope: "agent"` - One container per agent
+- `workspaceAccess: "none"` - NO Mac file system access
+- Tool policy: Only Slack, web search, memory allowed
+
+#### 3.2 Create Slack Bot (If Separate Token)
 
 **Option A: Separate Slack Bot** (Recommended)
-- ✅ Clear attribution (who said what)
-- ✅ Independent permissions
-- ✅ Can have different personality/avatar
-- ❌ Need to create new Slack app
 
-**Option B: Share Kobot's Token**
-- ✅ Quick setup, no new app needed
-- ❌ All messages appear as "Kobot"
-- ❌ Can't distinguish which agent replied
-- ❌ Shared rate limits
-
-**Recommendation:** **Separate Slack bot** for clarity
-
-**Steps to create:**
-1. Go to api.slack.com/apps
+1. Go to https://api.slack.com/apps
 2. Create new app "SlackKobot"
 3. Add bot scopes:
    - `chat:write`
@@ -279,197 +148,215 @@ git push -u origin main
    - `im:read`
    - `reactions:write`
    - `reactions:read`
-   - (same as Kobot for consistency)
 4. Install to workspace
-5. Save tokens to `~/.env-slackkobot` (separate file)
+5. Add tokens to `~/.env`:
+   ```bash
+   SLACKKOBOT_SLACK_BOT_TOKEN=xoxb-...
+   SLACKKOBOT_SLACK_APP_TOKEN=xapp-...
+   ```
 
-#### 2.4 Teach SlackKobot Git Management
+**Option B: Share Kobot's Token**
 
-**Initial setup (Kobot does this):**
+Use existing Slack tokens (quick test, but all messages appear as "Kobot")
+
+#### 3.3 Update LaunchAgent (If New Tokens)
+
+If using separate Slack bot, add to `~/Library/LaunchAgents/ai.openclaw.gateway.plist`:
+
+```xml
+<key>EnvironmentVariables</key>
+<dict>
+  <!-- Existing Kobot tokens -->
+  <key>TELEGRAM_BOT_TOKEN</key>
+  <string>8581196828:AAHDPHnUj5kPGWKFBZz68pkQly96NERJ4UI</string>
+  
+  <!-- SlackKobot tokens (NEW) -->
+  <key>SLACKKOBOT_SLACK_BOT_TOKEN</key>
+  <string>xoxb-YOUR-SLACKKOBOT-TOKEN</string>
+  <key>SLACKKOBOT_SLACK_APP_TOKEN</key>
+  <string>xapp-YOUR-SLACKKOBOT-APP-TOKEN</string>
+  
+  <!-- Other tokens... -->
+</dict>
+```
+
+Then reload LaunchAgent:
 ```bash
-# In SlackKobot's workspace
-cat > .git/config << 'EOF'
-[user]
-    name = SlackKobot
-    email = slackkobot@kobo.example.com
-[core]
-    repositoryformatversion = 0
-    filemode = true
-EOF
-```
-
-**SlackKobot learns to commit:**
-
-Add to SlackKobot's SOUL.md:
-```markdown
-## Self-Maintenance
-
-### Daily Commits
-At end of each day (or every 4 hours), commit my memory updates:
-```bash
-cd ~/clawd-agents/workspace-slackkobot
-git add memory/
-git commit -m "Memory: [date] - Interactions and learnings"
-git push origin main
-```
-
-### When I learn something valuable:
-1. Update MEMORY.md or create file in memory/
-2. Commit with descriptive message
-3. Push to remote (backup)
-
-### Never commit:
-- Secrets, tokens, passwords
-- Personal user data
-- Anything in .gitignore
-```
-
-**Kobot's role:**
-- Create initial workspace structure
-- Show SlackKobot how to commit
-- Monitor for first few days
-- Then SlackKobot is autonomous
-
----
-
-### ✅ Task 3: Docker Deployment Plan (Conditional)
-**Status:** Depends on Task 1 results  
-**Owner:** Kobot
-
-**If Docker available:**
-
-**Step 1: Create Dockerfile**
-```dockerfile
-# infrastructure/docker/slackkobot/Dockerfile
-FROM node:24-alpine
-
-# Install OpenClaw
-RUN npm install -g openclaw@latest
-
-# Create workspace
-WORKDIR /workspace
-
-# Copy entrypoint
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-
-# Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-  CMD wget --no-verbose --tries=1 --spider http://localhost:18790/health || exit 1
-
-ENTRYPOINT ["/entrypoint.sh"]
-```
-
-**Step 2: Create entrypoint.sh**
-```bash
-#!/bin/sh
-set -e
-
-echo "Starting SlackKobot..."
-
-# Clone/update workspace
-if [ ! -d "/workspace/.git" ]; then
-  echo "Cloning workspace..."
-  git clone https://github.com/aaron-kj/openclaw-workspace-slackkobot.git /workspace
-else
-  echo "Updating workspace..."
-  cd /workspace && git pull origin main
-fi
-
-# Start gateway
-cd /workspace
-exec openclaw gateway start --port 18790
-```
-
-**Step 3: Docker Compose**
-```yaml
-# infrastructure/docker/docker-compose.yml
-version: '3.8'
-
-services:
-  slackkobot:
-    build: ./slackkobot
-    container_name: slackkobot
-    volumes:
-      - slackkobot-workspace:/workspace
-    environment:
-      - SLACK_BOT_TOKEN=${SLACKKOBOT_SLACK_BOT_TOKEN}
-      - SLACK_APP_TOKEN=${SLACKKOBOT_SLACK_APP_TOKEN}
-    restart: unless-stopped
-    ports:
-      - "18790:18790"
-
-volumes:
-  slackkobot-workspace:
-```
-
-**Step 4: Test Locally**
-```bash
-cd infrastructure/docker
-docker-compose up -d slackkobot
-docker logs -f slackkobot
-
-# Test health
-curl http://localhost:18790/health
+launchctl bootout gui/$(id -u)/ai.openclaw.gateway
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/ai.openclaw.gateway.plist
 ```
 
 ---
 
-## 📊 Success Criteria
+### ✅ Task 4: Deploy and Test SlackKobot
 
-### End of Tomorrow (2026-02-04):
-- [ ] Docker availability confirmed
+#### 4.1 Start Gateway (Will Auto-Create Sandbox)
+
+Gateway auto-detects new agent config and creates sandbox container on first use.
+
+**Check sandbox status:**
+```bash
+openclaw sandbox list
+openclaw sandbox explain --agent slackkobot
+```
+
+**Expected output:**
+```
+Container: openclaw-sbx-slackkobot-main
+Status: running
+Image: openclaw-sandbox:bookworm-slim
+Workspace: /Users/chingchao.wu/clawd-agents/workspace-slackkobot
+Access: none (fully sandboxed)
+```
+
+#### 4.2 Test Communication
+
+**Via Slack:**
+1. Invite @SlackKobot to #kobo-japan-ai-sharing
+2. Ask a question: "@SlackKobot what is OpenClaw?"
+3. Should get response (from sandbox container)
+
+**Via sessions_send (from Kobot):**
+```javascript
+sessions_send({
+  label: "slackkobot",
+  message: "Hello SlackKobot! Can you introduce yourself?"
+})
+```
+
+#### 4.3 Verify Sandboxing
+
+**Test that file system is blocked:**
+
+Ask SlackKobot (via Slack or sessions_send):
+```
+"Can you read the file /etc/passwd?"
+```
+
+**Expected:** Should fail/refuse - no file system access
+
+**Check container:**
+```bash
+docker ps | grep slackkobot
+docker exec -it openclaw-sbx-slackkobot-main ls /workspace
+```
+
+Should see workspace files but no access to Mac Studio's file system.
+
+---
+
+## 📊 Comparison: Custom Docker vs OpenClaw Sandbox
+
+| Feature | Custom Docker (Old Plan) | OpenClaw Sandbox (New) |
+|---------|--------------------------|------------------------|
+| Setup complexity | High (Dockerfile, compose, scripts) | Low (config only) |
+| Container management | Manual | Automatic |
+| Image updates | Manual pull/rebuild | Built-in |
+| Health checks | Custom script | Built-in |
+| Auto-prune | Manual | Automatic (24h idle) |
+| Tool policy | Manual restrictions | Declarative config |
+| Workspace access | Docker volume config | `workspaceAccess` setting |
+| Multi-agent support | Separate compose files | Config per agent |
+
+**Winner:** OpenClaw Sandbox! 🎉
+
+---
+
+## 🚧 Potential Issues & Solutions
+
+### Issue 1: Sandbox Image Not Available
+**Symptom:** `docker: image not found: openclaw-sandbox:bookworm-slim`
+
+**Solution:**
+```bash
+# Pull official OpenClaw sandbox image
+docker pull openclaw/sandbox:bookworm-slim
+docker tag openclaw/sandbox:bookworm-slim openclaw-sandbox:bookworm-slim
+
+# Or check OpenClaw docs for correct image name
+```
+
+### Issue 2: LaunchAgent Doesn't See New Config
+**Symptom:** SlackKobot not starting
+
+**Solution:**
+```bash
+# Full LaunchAgent reload
+launchctl bootout gui/$(id -u)/ai.openclaw.gateway
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/ai.openclaw.gateway.plist
+
+# Check logs
+tail -f ~/.openclaw/logs/gateway.log
+```
+
+### Issue 3: Container Creation Fails
+**Symptom:** Sandbox container won't start
+
+**Diagnosis:**
+```bash
+openclaw sandbox list
+openclaw sandbox explain --agent slackkobot
+docker logs openclaw-sbx-slackkobot-main
+```
+
+**Solution:**
+```bash
+# Force recreate
+openclaw sandbox recreate --agent slackkobot --force
+```
+
+---
+
+## ✅ Success Criteria
+
+### Tomorrow (2026-02-04) End of Day:
 - [ ] GitHub repo `openclaw-workspace-slackkobot` created
-- [ ] SlackKobot workspace initialized with SOUL, USER, IDENTITY, MEMORY
-- [ ] Initial commit pushed to remote
-- [ ] Decision made on Slack token (separate vs shared)
+- [ ] Workspace initialized with all core files
+- [ ] SlackKobot agent added to OpenClaw config
+- [ ] Slack bot created (or token sharing decided)
+- [ ] Sandbox container created and running
+- [ ] First test message from SlackKobot in Slack
+- [ ] Verified file system access is blocked
 
 ### Stretch Goals:
-- [ ] Slack app created for SlackKobot
-- [ ] Docker deployment tested locally
-- [ ] First test message from SlackKobot in Slack
+- [ ] SlackKobot answers first real question in #kobo-japan-ai-sharing
+- [ ] Test escalation to Kobot via sessions_send
+- [ ] Document learnings in project docs
 
 ---
 
-## 🚧 Blockers / Risks
+## 📝 Updated Architecture Notes
 
-1. **Docker not available** → Need to install Docker Desktop
-2. **GitHub repo creation** → Might need manual UI action or `gh` CLI
-3. **Slack app approval** → May need workspace admin approval
-4. **Port conflicts** → 18790 might be in use (check with `lsof -i :18790`)
+Add to `ARCHITECTURE.md`:
 
----
+### Deployment: OpenClaw Sandbox (Not Custom Docker)
 
-## 📝 Notes
+**Discovery (2026-02-03):** OpenClaw has built-in sandbox feature that handles:
+- Automatic Docker container creation/management
+- Per-agent isolation (`scope: agent`)
+- Workspace access control (`workspaceAccess: none|read|write`)
+- Declarative tool policy in config
+- Auto-prune after idle period
 
-**Naming convention decision:** `{Channel/Domain}Kobot`
-- SlackKobot ✅
-- TelegramKobot (if needed)
-- HRKobot, MeetingKobot, ClickUpKobot (domain-specific)
+**Configuration-based, not Dockerfile-based.**
 
-**Workspace path:** `~/clawd-agents/workspace-{agentname}`
-- Kobot: `/Users/chingchao.wu/clawd` (existing)
-- SlackKobot: `~/clawd-agents/workspace-slackkobot`
+**Benefits:**
+- ✅ Simpler deployment (config > code)
+- ✅ Consistent across all agents
+- ✅ Built-in best practices
+- ✅ Easy to update/recreate containers
+- ✅ No custom Docker expertise needed
 
-**Communication:**
-- Telegram preferred for Aaron ↔ Kobot
-- Slack #kobot-coordination for inter-agent coordination
-- `sessions_send` for programmatic agent ↔ agent (same gateway)
-
-**Git management:**
-- Kobot creates initial structure
-- SlackKobot learns to commit by itself
-- Each agent commits as its own identity
+**Previous plan (custom Docker):** Archived, replaced by OpenClaw sandbox approach.
 
 ---
 
-## 🔗 Related Documents
+## 🔗 References
 
-- [Main project README](../README.md)
-- [Architecture](../ARCHITECTURE.md)
-- [Strategy](../STRATEGY.md)
+- [OpenClaw Sandbox CLI](https://docs.openclaw.ai/cli/sandbox)
+- [OpenClaw Sandboxing Docs](https://docs.openclaw.ai/gateway/sandboxing)
+- [Previous deployment plan](./SLACKKOBOT-DEPLOYMENT-PLAN.md.old) (archived)
 
-**Tomorrow's review:**
-- Check progress on all tasks
-- Adjust plan based on findings
-- Decide on next steps (local test vs production deployment)
+---
+
+**Next Review:** Tomorrow evening (2026-02-04) after deployment attempt
