@@ -71,8 +71,9 @@ OpenClaw supports routing different channels to different agents via `bindings` 
   - `C0ABFDLC1S7` - #talking-with-clawdbot-test
   - `C09AWDW6GDA` - #kobo-japan-ai-sharing (team AI news curator!)
 
-- **Aiko-sensei:**
-  - No automatic routing (manual session only)
+- **Aiko-sensei handles:**
+  - `C0AD21BHNQ5` - #learn-japanese (daily lessons at 8 AM JST!)
+  - Also available via manual sessions for 1-on-1 teaching
 
 ## Channel IDs Reference
 
@@ -81,6 +82,7 @@ OpenClaw supports routing different channels to different agents via `bindings` 
 | Aaron's DM | D0ACGA44Z6U | Kobot |
 | #talking-with-clawdbot-test | C0ABFDLC1S7 | SlackKobot |
 | #kobo-japan-ai-sharing | C09AWDW6GDA | SlackKobot |
+| #learn-japanese | C0AD21BHNQ5 | Aiko-sensei |
 
 ## How to Update Routing
 
