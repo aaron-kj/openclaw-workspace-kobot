@@ -48,7 +48,9 @@ When it's time for the summary:
 5. **Add a closing thought:** One sentence tying topics together or looking ahead
 6. Format clearly in English with emoji for visual appeal
 7. **Save to file:** `ai-news/YYYY-MM-DD-weekly-ai-news.md` (create ai-news/ if needed)
-8. **Send to #kobo-japan-ai-sharing:** channel=slack, target=C09AWDW6GDA
+8. **Send TWO versions:**
+   - **Detailed summary (DM):** Full summary with all sections to Aaron's DM (channel=slack, target=D0ACGA44Z6U)
+   - **Digest version (Channel):** 2-3 curated topics (format above) to #kobo-japan-ai-sharing (channel=slack, target=C09AWDW6GDA)
 9. **Commit to Git:** Add, commit, and push the ai-news file to GitHub
 
 **Tone:** Conversational, insightful, practical. Like sharing interesting findings with colleagues over coffee.
