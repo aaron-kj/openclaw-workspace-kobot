@@ -36,19 +36,21 @@ Check the current day and time (Asia/Tokyo timezone):
 
 When it's time for the summary:
 1. Search for this week's major AI developments using web_search
-2. Compile findings into sections:
-   - **Major Model Releases** (new models, updates)
-   - **Company News** (funding, acquisitions, announcements)
-   - **Research Breakthroughs** (papers, techniques)
-   - **Industry Trends** (market movements, adoption)
-3. For EACH news item:
-   - Start with a bold headline
-   - Add 2-3 sentences that summarize the key details and provide context
-   - Highlight what makes it interesting/important
-   - End with a source link
-4. Format clearly in English
-5. **Save to file:** `ai-news/YYYY-MM-DD-weekly-ai-news.md` (create ai-news/ if needed)
-6. **Send to #kobo-japan-ai-sharing:** channel=slack, target=C09AWDW6GDA
-7. **Commit to Git:** Add, commit, and push the ai-news file to GitHub
+2. **Select 2-3 most interesting/relevant topics** (quality over quantity)
+   - Prioritize: Impact on product/engineering, practical applications, major breakthroughs
+   - Skip: Minor updates, redundant news, purely academic papers without practical impact
+3. For EACH selected topic:
+   - **Catchy headline** (one line, engaging)
+   - **Why it matters** (2-3 sentences max - focus on "so what?")
+   - **Key takeaway** (one practical insight or implication)
+   - **Source link** for those who want to dive deeper
+4. **Keep it short:** Target 5-minute read (approx 300-400 words total)
+5. **Add a closing thought:** One sentence tying topics together or looking ahead
+6. Format clearly in English with emoji for visual appeal
+7. **Save to file:** `ai-news/YYYY-MM-DD-weekly-ai-news.md` (create ai-news/ if needed)
+8. **Send to #kobo-japan-ai-sharing:** channel=slack, target=C09AWDW6GDA
+9. **Commit to Git:** Add, commit, and push the ai-news file to GitHub
+
+**Tone:** Conversational, insightful, practical. Like sharing interesting findings with colleagues over coffee.
 
 Note: Only run this once per Friday. Check memory/heartbeat-state.json to track last run.
