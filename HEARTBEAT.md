@@ -50,9 +50,10 @@ When it's time for the summary:
 7. **Save TWO files:** (create ai-news/ if needed)
    - `ai-news/YYYY-MM-DD-detailed.md` - Full comprehensive summary
    - `ai-news/YYYY-MM-DD-digest.md` - Curated 2-3 topics version
-8. **Send TWO versions:**
-   - **Detailed summary (DM):** Full summary from detailed.md to Aaron's DM (channel=slack, target=D0ACGA44Z6U)
-   - **Digest version (Channel):** Curated topics from digest.md to #kobo-japan-ai-sharing (channel=slack, target=C09AWDW6GDA)
+8. **Deliver the news:**
+   - **Detailed version → Aaron's DM:** Send full summary to Aaron's DM directly (channel=slack, target=D0ACGA44Z6U)
+   - **Digest version → SlackKobot:** Send digest to SlackKobot via `sessions_send` with instruction to post to #kobo-japan-ai-sharing
+   - Message to SlackKobot: "Hey SlackKobot! Here's this week's AI news digest. Please share it with the team in #kobo-japan-ai-sharing:\n\n[paste digest content]"
 9. **Commit to Git:** Add, commit, and push both ai-news files to GitHub
 
 **Tone:** Conversational, insightful, practical. Like sharing interesting findings with colleagues over coffee.
