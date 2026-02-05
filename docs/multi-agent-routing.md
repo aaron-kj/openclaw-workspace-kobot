@@ -41,13 +41,6 @@ OpenClaw supports routing different channels to different agents via `bindings` 
     {
       "agentId": "main",
       "match": {
-        "channel": "slack",
-        "peer": { "kind": "channel", "id": "C09AWDW6GDA" }
-      }
-    },
-    {
-      "agentId": "main",
-      "match": {
         "channel": "telegram"
       }
     },
@@ -57,6 +50,13 @@ OpenClaw supports routing different channels to different agents via `bindings` 
         "channel": "slack",
         "peer": { "kind": "channel", "id": "C0ABFDLC1S7" }
       }
+    },
+    {
+      "agentId": "slackkobot",
+      "match": {
+        "channel": "slack",
+        "peer": { "kind": "channel", "id": "C09AWDW6GDA" }
+      }
     }
   ]
 }
@@ -65,11 +65,11 @@ OpenClaw supports routing different channels to different agents via `bindings` 
 **Routing Map:**
 - **Kobot handles:**
   - `D0ACGA44Z6U` - Aaron's Slack DM
-  - `C09AWDW6GDA` - #kobo-japan-ai-sharing
   - All Telegram messages (@kobo_tokyo_bot)
   
 - **SlackKobot handles:**
   - `C0ABFDLC1S7` - #talking-with-clawdbot-test
+  - `C09AWDW6GDA` - #kobo-japan-ai-sharing (team AI news curator!)
 
 - **Aiko-sensei:**
   - No automatic routing (manual session only)
@@ -79,8 +79,8 @@ OpenClaw supports routing different channels to different agents via `bindings` 
 | Channel | ID | Agent |
 |---------|-----|-------|
 | Aaron's DM | D0ACGA44Z6U | Kobot |
-| #kobo-japan-ai-sharing | C09AWDW6GDA | Kobot |
 | #talking-with-clawdbot-test | C0ABFDLC1S7 | SlackKobot |
+| #kobo-japan-ai-sharing | C09AWDW6GDA | SlackKobot |
 
 ## How to Update Routing
 
