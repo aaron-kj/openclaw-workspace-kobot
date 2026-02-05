@@ -3,20 +3,28 @@
 # Keep this file empty (or with only comments) to skip heartbeat API calls.
 # Add tasks below when you want the agent to check something periodically.
 
-## TEST: One-time AI News Summary (Today at 2:00 PM JST)
+## Weekly System Update Check (Mondays 1:00 PM JST)
 
-**ONE-TIME TEST ONLY - REMOVE AFTER EXECUTION**
-
-Check the current time (Asia/Tokyo timezone):
-- If it's today (Wednesday Jan 29) AND between 2:00-2:30 PM JST, run the AI news summary test
-- Otherwise, skip this task (return HEARTBEAT_OK)
+Check the current day and time (Asia/Tokyo timezone):
+- If it's Monday AND between 1:00-1:30 PM JST, proceed with update check
+- Otherwise, skip this task
 
 When it's time:
-1. Search for this week's major AI developments using web_search
-2. Compile findings into sections as usual
-3. For EACH news item: bold headline + 2-3 sentences summary + source link
-4. Send to chingchao.wu's Slack DM (channel=slack, target=D0ACGA44Z6U)
-5. Add a note that this is a TEST RUN to verify heartbeat functionality
+1. Check Node.js version vs OpenClaw installation location
+2. Check for new OpenClaw releases on npm
+3. Check for Node.js LTS updates
+4. Assess risk level (critical/medium/low) based on:
+   - Security vulnerabilities
+   - Breaking changes in changelog
+   - Version type (major/minor/patch)
+5. Send report to Aaron's Slack DM (channel=slack, target=D0ACGA44Z6U) with:
+   - Current versions
+   - Available updates
+   - Risk assessment
+   - Recommendation (upgrade now / wait / skip)
+   - Link to changelogs
+
+Note: Only check once per week. Track in memory/heartbeat-state.json.
 
 ---
 
