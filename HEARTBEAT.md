@@ -47,6 +47,8 @@ When it's time for the summary:
    - Highlight what makes it interesting/important
    - End with a source link
 4. Format clearly in English
-5. Send to chingchao.wu's Slack DM using: message tool with channel=slack, target=D0ACGA44Z6U
+5. **Save to file:** `ai-news/YYYY-MM-DD-weekly-ai-news.md` (create ai-news/ if needed)
+6. **Send to #kobo-japan-ai-sharing:** channel=slack, target=C09AWDW6GDA
+7. **Commit to Git:** Add, commit, and push the ai-news file to GitHub
 
 Note: Only run this once per Friday. Check memory/heartbeat-state.json to track last run.
