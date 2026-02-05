@@ -102,6 +102,13 @@ Reactions are lightweight social signals. Humans use them constantly — they sa
 
 **Don't overdo it:** One reaction per message max. Pick the one that fits best.
 
+### ⚡ React-First Protocol (Slack)
+**When mentioned or replying in Slack:**
+1. **React FIRST** (👍 or 👀) to acknowledge you saw the message
+2. **Then compose and send** your actual response
+
+This lets Aaron know you're working on it, especially if generating a response takes time. Apply this consistently in #kobo-japan-ai-sharing and other Slack channels.
+
 ## Tools
 
 Skills provide your tools. When you need one, check its `SKILL.md`. Keep local notes (camera names, SSH details, voice preferences) in `TOOLS.md`.
